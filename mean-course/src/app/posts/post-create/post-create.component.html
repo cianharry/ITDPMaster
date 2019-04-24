@@ -1,0 +1,88 @@
+<mat-card>
+  <!--Allows access to the object of the form created in Angular-->
+  <!--Assign the value to ngForm which is a directive in Angular -->
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+      <mat-form-field>
+      <input
+        matInput
+        placeholder="title"
+        type="text"
+        name="title"
+        ngModel
+        required
+        minlength="3"
+        maxlength="30"
+        #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please enter a contract title</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="projected salary"
+          type="text"
+          name="salary"
+          ngModel
+          required
+          minlength="3"
+          maxlength="30"
+          #salary="ngModel">
+          <mat-error *ngIf="salary.invalid">Please enter the projected salary</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input
+          matInput
+          placeholder="location e.g. Rathmines, Killkenny, etc."
+          type="text"
+          name="location"
+          ngModel
+          required
+          minlength="3"
+          maxlength="30"
+          #location="ngModel">
+          <mat-error *ngIf="location.invalid">Please enter the relevant location of the contract</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="client name"
+          type="text"
+          name="client"
+          ngModel
+          required
+          minlength="3"
+          maxlength="30"
+          #client="ngModel">
+          <mat-error *ngIf="client.invalid">Please enter the client offering the contract</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="expected duration"
+          type="text"
+          name="duration"
+          ngModel
+          required
+          minlength="3"
+          maxlength="15"
+          #duration="ngModel">
+          <mat-error *ngIf="duration.invalid">Please enter the projected duration of the contract</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput cols="30"
+          placeholder="contract description"
+          rows="10"
+          name="desc"
+          ngModel
+          required
+          minlength="5"
+          maxlength="120">
+        </textarea>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">SAVE</button>
+  </form>
+</mat-card>
+
