@@ -1,6 +1,7 @@
 <mat-card>
   <!--Allows access to the object of the form created in Angular-->
   <!--Assign the value to ngForm which is a directive in Angular -->
+  <!--Angular material library used as reference for form styling and error display: https://material.angular.io/components/form-field/overview-->
   <form (submit)="onAddPost(postForm)" #postForm="ngForm">
       <mat-form-field>
       <input
@@ -17,8 +18,10 @@
       </mat-form-field>
       <mat-form-field>
         <input
+          style="padding-left: 2px;"
+          class="right-align"
           matInput
-          placeholder="projected salary"
+          placeholder="  projected salary"
           type="text"
           name="salary"
           ngModel
@@ -26,6 +29,8 @@
           minlength="3"
           maxlength="30"
           #salary="ngModel">
+          <span matPrefix>&euro;</span>
+          <span matSuffix>.00</span>
           <mat-error *ngIf="salary.invalid">Please enter the projected salary</mat-error>
       </mat-form-field>
       <mat-form-field>

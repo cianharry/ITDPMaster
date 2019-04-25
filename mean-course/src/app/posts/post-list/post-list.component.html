@@ -9,7 +9,7 @@
     <h3>{{ post.duration }}</h3>
     <h3>{{ post.desc }}</h3>
     <mat-action-row>
-      <button color="primary" mat-button>EDIT</button>
+      <a mat-button color="primary" mat-button [routerLink]="['/edit', post.id]" routerLinkActive="router-link-active" >EDIT</a>
       <button color="warn" mat-button (click)="onDelete(post.id)">DELETE</button>
     </mat-action-row>
   </mat-expansion-panel>

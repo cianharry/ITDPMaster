@@ -43,6 +43,10 @@ export class PostsService {
     return this.postsUpdated.asObservable();
   }
 
+  getPost(id: string) {
+    return {...this.posts.find(e => e.id === id)}
+  }
+
   addPost(title: string, salary: string, location: string, client: string, duration: string, desc: string) {
     const post: Post = {id: null, title: title, salary: salary, location: location, client: client, duration: duration, desc: desc};
     // will execute asynchronously only if their is a success response

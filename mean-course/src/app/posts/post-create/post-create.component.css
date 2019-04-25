@@ -3,3 +3,13 @@ mat-form-field,
 textarea {
   width: 100%;
 }
+
+.right-align {
+  text-align: right;
+  -moz-appearance: textfield;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
