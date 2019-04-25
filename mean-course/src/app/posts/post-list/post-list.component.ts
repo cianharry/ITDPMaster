@@ -9,7 +9,9 @@ import { PostsService } from '../posts.service';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent implements OnInit, OnDestroy {
+
+// ADD BACK IN IF USING ngOnDestroy
+export class PostListComponent implements OnInit{
 
   posts: Post[] = [];
   private postsSub: Subscription;
@@ -30,7 +32,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsServices.deletePost(postId);
   }
   // used to prevent memory leaks when this component is not being used directly
-  ngOnDestroy(){
-    this.postsSub.unsubscribe();
-  }
+  // ngOnDestroy(){
+  // this.postsSub.unsubscribe();
+  // }
 }
