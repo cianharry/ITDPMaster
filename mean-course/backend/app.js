@@ -1,7 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const Post = require('./models/post');
 
 const app = express();
+
+// connection to MongoDB Atlas cloud server
+mongoose.connect('mongodb+srv://cian:8zWDHq8iWGDyfNMz@cluster0-kbtyk.mongodb.net/contract-hub?retryWrites=true')
+  .then(() => {
+    console.log('Connected to DB')
+  })
+  .catch(() => {
+    console.log('Connection Failed!')
+  });
 
 // used to parse the body of the data response for the post method
 app.use(bodyParser.json());
@@ -21,30 +33,41 @@ app.use((req, res, next) => {
   );
   next();
 });
-
+// MongoDB password: 8zWDHq8iWGDyfNMz
+// storing new contract posts in Mongo
 app.post('/api/posts', (req, res, next) => {
-  const post = req.body;
-  console.log(post);
-  res.status(201).json({
-    message: 'post added successfully'
+  // instantiation of the Post model
+  // imported from the constructor function exported from post.js
+  const post = new Post({
+    title: req.body.title,
+    salary: req.body.salary,
+    location: req.body.location,
+    client: req.body.client,
+    duration: req.body.duration,
+    desc: req.body.desc
+  });
+  // saves the mongoose model
+  post.save().then(createdPost => {
+    res.status(201).json({
+      message: 'post added successfully',
+      postId: createdPost._id
+    });
   });
 });
 
 app.get('/api/posts', (req, res, next) => {
-  const posts = [
-    {
-      id: "1",
-      title: "Softare Eng",
-      salary: "3000"
-    },
-    {
-      id: "2",
-      title: "Programmer",
-      salary: "5000"
-    }
-  ];
-  res.status(200).json({
-    posts: posts
+  Post.find()
+  .then(documents => {
+    res.status(200).json({
+      posts: documents
+    });
+  });
+});
+
+app.delete('/api/posts/:id', (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({ message: 'Contract deleted!' });
   });
 });
 
